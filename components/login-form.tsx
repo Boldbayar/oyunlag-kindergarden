@@ -15,20 +15,16 @@ export default function LoginForm() {
   const [regNum, setRegNum] = useState("");
 
   async function fetchQr() {
-    const response = await
-    axios.get('http://stud.oyunlag.edu.mn:8081/api/kinder-garden/charge-initiate?regNum=' + regNum, {
-      withCredentials: true,
-      headers: {
-        'Origin': 'https://oyunlag-kindergarden.vercel.app'
-      }
+    const response = await axios.get('http://stud.oyunlag.edu.mn:8081/api/kinder-garden/charge-initiate?regNum=' + regNum, {
+      withCredentials: true
     });
-
+  
     if (response.status === 200) {
-      if(response.data.content){
-        if(response.data.content.qPay_QRimage){
+      if (response.data.content) {
+        if (response.data.content.qPay_QRimage) {
           setQR(response.data.content.qPay_QRimage);
         } else {
-            toast.error(response.data.content.name);
+          toast.error(response.data.content.name);
         }
       } else {
         toast.error('QPAY-дээр алдаа гарлаа');
