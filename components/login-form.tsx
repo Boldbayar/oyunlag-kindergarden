@@ -52,7 +52,7 @@ export default function LoginForm() {
             try {
               await fetchQr();
             } catch (error) {
-              toast.error(error);
+              toast.error("error: " + error);
             }
             setSubmitting(false);
           }} 
