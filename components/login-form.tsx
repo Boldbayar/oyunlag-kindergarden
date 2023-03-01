@@ -16,28 +16,29 @@ export default function LoginForm() {
 
   async function fetchQr() {
     const response = await fetch('http://stud.oyunlag.edu.mn:8081/api/kinder-garden/charge-initiate?regNum=' + regNum, {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-    'Origin': 'https://oyunlag-kindergarden.vercel.app'
-  },
-  credentials: 'include'
-});
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Origin': 'https://oyunlag-kindergarden.vercel.app'
+      },
+      credentials: 'include',
+      mode: 'cors'
+    });
 
-if (response.ok) {
-  const responseData = await response.json();
-  if (responseData.content) {
-    if (responseData.content.qPay_QRimage) {
-      setQR(responseData.content.qPay_QRimage);
+    if (response.ok) {
+      const responseData = await response.json();
+      if (responseData.content) {
+        if (responseData.content.qPay_QRimage) {
+          setQR(responseData.content.qPay_QRimage);
+        } else {
+          toast.error(responseData.content.name);
+        }
+      } else {
+        toast.error('QPAY-дээр алдаа гарлаа');
+      }
     } else {
-      toast.error(responseData.content.name);
+      toast.error('Error: HTTP status code ' + response.status);
     }
-  } else {
-    toast.error('QPAY-дээр алдаа гарлаа');
-  }
-} else {
-  toast.error('Error: HTTP status code ' + response.status);
-}
   }
 
 
