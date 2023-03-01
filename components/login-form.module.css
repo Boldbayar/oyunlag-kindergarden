@@ -1,0 +1,10 @@
+.login_box {
+    width: 340px;
+    border-radius: 12px;
+    background-color: #fff;
+}
+
+.login_button {
+    display: flex;
+    justify-content: space-between;
+}
