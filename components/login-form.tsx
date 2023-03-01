@@ -15,10 +15,14 @@ export default function LoginForm() {
   const [regNum, setRegNum] = useState("");
 
   async function fetchQr() {
+    const response = await
+    axios.get('http://stud.oyunlag.edu.mn:8081/api/kinder-garden/charge-initiate?regNum=' + regNum, {
+      withCredentials: true,
+      headers: {
+        'Origin': 'https://oyunlag-kindergarden.vercel.app'
+      }
+    });
 
-    console.log(regNum);
-    const response = await axios.get('http://stud.oyunlag.edu.mn:8081/api/kinder-garden/charge-initiate?regNum=' + regNum);
-    
     if (response.status === 200) {
       if(response.data.content){
         if(response.data.content.qPay_QRimage){
